@@ -60,4 +60,6 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
 
+    // Lottie
+    implementation("com.airbnb.android:lottie:4.2.1")
 }
