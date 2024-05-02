@@ -4,8 +4,7 @@ import com.example.core.Configuration
 import com.example.core.service.ServiceCreator.Builder.Companion.buildDefaultServiceCreator
 import kotlin.reflect.KClass
 
-internal class ServiceProvider(
-) {
+internal class ServiceProvider() {
 
     private val tokenizedServiceCreator: ServiceCreator
 

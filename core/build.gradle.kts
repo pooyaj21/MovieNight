@@ -54,4 +54,7 @@ dependencies {
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
+    //Koin
+    implementation("io.insert-koin:koin-core:3.4.3")
 }
