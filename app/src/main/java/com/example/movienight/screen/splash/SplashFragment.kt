@@ -33,8 +33,8 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.taskFlow.onEach {
-            navOptions { popUpTo(R.id.nav_graph) }
-            findNavController().navigate(R.id.startFragment)
+            val navOptions = navOptions { popUpTo(R.id.nav_graph) }
+            findNavController().navigate(R.id.startFragment, null, navOptions)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }
