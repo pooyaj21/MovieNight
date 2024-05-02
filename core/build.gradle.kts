@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlinx-serialization")
     id("kotlin-parcelize")
@@ -7,12 +7,10 @@ plugins {
 
 android {
     namespace = "com.example.core"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.core"
-        minSdk = 21
-        targetSdk = 33
+        minSdk = 26
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
