@@ -1,6 +1,8 @@
 package com.example.core.di
 
-import com.example.core.data.local.repository.MovieLists
+import com.example.core.data.local.rao.MovieLists
+import com.example.core.data.local.repository.MovieListRepository
+import com.example.core.data.local.repository.MovieListRepositoryImpl
 import com.example.core.data.remote.repository.MovieRepository
 import com.example.core.data.remote.repository.MovieRepositoryImpl
 import com.example.core.domain.usecase.*
@@ -21,6 +23,8 @@ val coreDiModule = module {
     // Data
     factory<MovieRepository> { MovieRepositoryImpl(movieService = get()) }
 
+    factory<MovieListRepository> { MovieListRepositoryImpl(movieLists = get()) }
+
     // Domain
     single { MovieLists() }
 
@@ -33,25 +37,25 @@ val coreDiModule = module {
 
     factory<GetMatchingMoviesUseCase> {
         GetMatchingMoviesUseCaseImpl(
-            movieLists = get()
+            movieListRepository = get()
         )
     }
 
     factory<InsertFirstMoviesListUseCase> {
         InsertFirstMoviesListUseCaseImpl(
-            movieLists = get()
+            movieListRepository = get()
         )
     }
 
     factory<InsertSecondMoviesListUseCase> {
         InsertSecondMoviesListUseCaseImpl(
-            movieLists = get()
+            movieListRepository = get()
         )
     }
 
     factory<GetCountOfListCompletedUseCase> {
         GetCountOfListCompletedUseCaseImpl(
-            movieLists = get()
+            movieListRepository = get()
         )
     }
 
