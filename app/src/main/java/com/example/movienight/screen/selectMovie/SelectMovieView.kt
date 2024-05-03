@@ -24,22 +24,25 @@ class SelectMovieView(context: Context) : LinearLayout(context) {
 
     private val imDownTextView = TextView(context).apply {
         text = "<- I'm Down"
-        gravity = Gravity.CENTER
+        gravity = Gravity.LEFT
         setTextColor(Color.WHITE)
     }
     private val notFeelingItTextView = TextView(context).apply {
         text = "Not Feeling It ->"
-        gravity = Gravity.CENTER
+        gravity = Gravity.RIGHT
 
         setTextColor(Color.WHITE)
     }
     private val actionBar = LinearLayout(context).apply {
         orientation = HORIZONTAL
         gravity = Gravity.CENTER
-        addView(imDownTextView, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
+        addView(
+            imDownTextView,
+            LayoutParams((Screen.size.width * 0.4).toInt(), LayoutParams.WRAP_CONTENT)
+        )
         addView(
             notFeelingItTextView,
-            LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            LayoutParams((Screen.size.width * 0.4).toInt(), LayoutParams.WRAP_CONTENT)
         )
     }
 
