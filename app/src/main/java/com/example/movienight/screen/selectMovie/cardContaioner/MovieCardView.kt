@@ -15,6 +15,7 @@ import com.example.movienight.exctation.load
 @SuppressLint("ViewConstructor")
 class MovieCardView(movie: Movie, context: Context) : CardView(context) {
     private val image = ImageView(context).apply {
+        scaleType = ImageView.ScaleType.CENTER
         load(movie.posterImage)
     }
     private val title = TextView(context).apply {

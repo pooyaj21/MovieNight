@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.asynctaskcoffee.cardstack.CardContainer
+import com.asynctaskcoffee.cardstack.px
 import com.example.core.model.Movie
 import com.example.movienight.Screen
 import com.example.movienight.exctation.dpToPx
@@ -16,6 +17,9 @@ import com.example.movienight.screen.selectMovie.cardContaioner.CardContainerAda
 class SelectMovieView(context: Context) : LinearLayout(context) {
     private val cardContainer = CardContainer(context, null).apply {
         isVisible = false
+        margin = 3.px
+        marginTop = 6.px
+        maxStackSize = 5
     }
 
     private val imDownTextView = TextView(context).apply {
@@ -45,14 +49,14 @@ class SelectMovieView(context: Context) : LinearLayout(context) {
         orientation = VERTICAL
         val actionBarLayoutParams = LayoutParams(
             LayoutParams.MATCH_PARENT,
-            (Screen.size.height * 0.2).toInt()
+            (Screen.size.height * 0.1).toInt()
         ).apply {
             gravity = Gravity.CENTER
             setPadding(5.dpToPx, 5.dpToPx, 5.dpToPx, 5.dpToPx)
         }
         val cardContainerLayoutParams = LayoutParams(
             LayoutParams.MATCH_PARENT,
-            (Screen.size.height * 0.7).toInt()
+            (Screen.size.height * 0.8).toInt()
         ).apply {
             gravity = Gravity.CENTER
             setPadding(5.dpToPx, 5.dpToPx, 5.dpToPx, 5.dpToPx)

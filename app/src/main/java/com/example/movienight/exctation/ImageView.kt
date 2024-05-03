@@ -15,7 +15,7 @@ fun ImageView.load(image: Image?) {
     Glide.with(context)
         .asBitmap()
         .transition(BitmapTransitionOptions.withCrossFade(crossFadeFactory))
-        .placeholder(R.color.white)
+        .placeholder(R.color.gray)
         .load(ImageUrl.basUrl + image.url)
         .into(this)
 }
