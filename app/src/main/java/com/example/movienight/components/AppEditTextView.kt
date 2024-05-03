@@ -3,7 +3,9 @@ package com.example.movienight.components
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.text.TextUtils
 import android.view.Gravity
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.FrameLayout
 import com.example.movienight.exctation.dpToPx
@@ -45,6 +47,23 @@ class AppEditTextView(context: Context) : FrameLayout(context) {
             }
         addView(editTextView, layoutParams)
 
+    }
+
+    fun setOnDoneClickListener(listener: () -> Unit) {
+        editTextView.imeOptions = EditorInfo.IME_ACTION_DONE
+        editTextView.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                listener.invoke()
+            }
+            false
+        }
+    }
+
+    fun singleLine() {
+        editTextView.setSingleLine()
+        editTextView.setLines(1)
+        editTextView.maxLines = 1
+        editTextView.ellipsize = TextUtils.TruncateAt.END
     }
 
 }

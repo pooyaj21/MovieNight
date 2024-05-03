@@ -25,10 +25,15 @@ class StartView(
     private val firstNameEditText = AppEditTextView(context).apply {
         id = generateViewId()
         hint = "First person name"
+        singleLine()
     }
     private val secondNameEditText = AppEditTextView(context).apply {
         id = generateViewId()
         hint = "Second person name"
+        singleLine()
+        setOnDoneClickListener {
+            letsGo()
+        }
     }
     private val andTextView = TextView(context).apply {
         id = generateViewId()
@@ -40,7 +45,7 @@ class StartView(
         id = generateViewId()
         background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
-            setColor(resources.getColor(R.color.mahogany,resources.newTheme()))
+            setColor(resources.getColor(R.color.mahogany, resources.newTheme()))
             setStroke(1.dpToPx, Color.WHITE)
             cornerRadius = 12.dpToPx.toFloat()
         }
@@ -116,12 +121,12 @@ class StartView(
         secondNameEditText.error = null
         val firstName = firstNameEditText.text
         val secondName = secondNameEditText.text
-        if (firstName.isNullOrBlank().not() && secondName.isNullOrBlank().not()) {
-            onNextClick(firstName.toString(), secondName.toString())
+        if (firstName.isBlank().not() && secondName.isBlank().not()) {
+            onNextClick(firstName, secondName)
         } else {
-            if (firstName.isNullOrBlank())
+            if (firstName.isBlank())
                 firstNameEditText.error = "You must fill this"
-            if (secondName.isNullOrBlank())
+            if (secondName.isBlank())
                 secondNameEditText.error = "You must fill this"
         }
     }
