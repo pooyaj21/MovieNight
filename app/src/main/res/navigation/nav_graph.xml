@@ -16,4 +16,10 @@
         android:label="StartFragment">
     </fragment>
 
+    <fragment
+        android:id="@+id/selectMovieFragment"
+        android:name="com.example.movienight.screen.selectMovie.SelectMovieFragment"
+        android:label="SelectMovieFragment">
+    </fragment>
+
 </navigation>

@@ -10,7 +10,7 @@ fun <T, R> NightResult<BaseListResponse<T>>.mapDataIfSuccess(
 ): NightResult<BaseListModel<R>> {
     return mapIfSuccess {
         val data: List<T> = it.results
-        return if (data.isEmpty()) NightResult.Success(BaseListModel(data.map { eachData ->
+        return if (data.isEmpty().not()) NightResult.Success(BaseListModel(data.map { eachData ->
             transform(
                 eachData
             )

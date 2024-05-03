@@ -5,6 +5,7 @@ import android.util.Log
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import java.io.File
 
 class MoveNight : Application() {
 
@@ -23,6 +24,9 @@ class MoveNight : Application() {
 //        registerActivityLifecycleCallbacks(ActivityLifeCycleLogger())
 //        registerActivityLifecycleCallbacks(FragmentLifecycleLogger.Build())
         //TODO :add this
+
+        val dexOutputDir: File = codeCacheDir
+        dexOutputDir.setReadOnly()
     }
 
 }

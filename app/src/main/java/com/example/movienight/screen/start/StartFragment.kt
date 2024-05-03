@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.movienight.R
 
-class StartFragment : Fragment(){
+class StartFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,7 +18,7 @@ class StartFragment : Fragment(){
         return StartView(
             requireContext(),
             onNextClick = { firstName, secondName ->
-
+                findNavController().navigate(R.id.selectMovieFragment)
             }
         )
     }

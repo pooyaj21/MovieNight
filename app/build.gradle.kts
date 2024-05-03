@@ -62,4 +62,10 @@ dependencies {
 
     // Lottie
     implementation("com.airbnb.android:lottie:4.2.1")
+
+    // CardSwipe
+    implementation("com.github.AsynctaskCoffee:tinderlikecardstack:1.0")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }
