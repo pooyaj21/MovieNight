@@ -4,16 +4,16 @@ import com.example.core.data.local.repository.MovieListRepository
 import com.example.core.domain.UseCase
 import com.example.core.model.Movie
 
-interface InsertFirstMoviesListUseCase : UseCase {
+interface InsertFoundedMoviesListUseCase : UseCase {
     operator fun invoke(list: List<Movie>): List<Movie>
 }
 
-internal class InsertFirstMoviesListUseCaseImpl(
+internal class InsertFoundedMoviesListUseCaseImpl(
     private val movieListRepository: MovieListRepository
-) : InsertFirstMoviesListUseCase {
+) : InsertFoundedMoviesListUseCase {
 
     override fun invoke(list: List<Movie>): List<Movie> {
-        return movieListRepository.insertFirstList(list)
+        return movieListRepository.insertFoundedList(list)
     }
 
 }

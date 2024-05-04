@@ -1,4 +1,4 @@
-package com.example.movienight.screen.selectMovie
+package com.example.movienight.screen.startConfirmation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,43 +12,32 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SelectMovieFragment : Fragment() {
+class NameFragment : Fragment() {
 
-    private val viewModel: SelectMovieViewModel by viewModel()
+    private val viewModel: NameViewModel by viewModel()
 
-    private var selectMovieView: SelectMovieView? = null
+    private var nameView: NameView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        selectMovieView = SelectMovieView(
+        nameView = NameView(
             requireContext(),
-            onSwipeCompleted = { favorite ->
-                viewModel.listEnded(favorite)
+            goNext = {
+                findNavController().navigate(R.id.selectMovieFragment)
             }
         )
-        return selectMovieView
+        return nameView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.taskFlow.onEach { task ->
             when (task) {
-                is SelectMovieTask.ListFound -> selectMovieView?.submitList(task.movies)
-                SelectMovieTask.NextList -> {
-                    findNavController().navigate(R.id.nameFragment)
-                }
-                SelectMovieTask.GoNext -> {
-                    //TODO:navigate to next page
-                }
+                is NameTask.ChosenName -> nameView?.setName(arguments?.getString(task.tag) ?: "")
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        selectMovieView = null
     }
 }

@@ -41,6 +41,12 @@ val coreDiModule = module {
         )
     }
 
+    factory<InsertFoundedMoviesListUseCase> {
+        InsertFoundedMoviesListUseCaseImpl(
+            movieListRepository = get()
+        )
+    }
+
     factory<InsertFirstMoviesListUseCase> {
         InsertFirstMoviesListUseCaseImpl(
             movieListRepository = get()
@@ -59,4 +65,15 @@ val coreDiModule = module {
         )
     }
 
+    factory<GetFoundedMoviesUseCase> {
+        GetFoundedMoviesUseCaseImpl(
+            movieListRepository = get()
+        )
+    }
+
+    factory<InsertFoundedMoviesListUseCase> {
+        InsertFoundedMoviesListUseCaseImpl(
+            movieListRepository = get()
+        )
+    }
 }

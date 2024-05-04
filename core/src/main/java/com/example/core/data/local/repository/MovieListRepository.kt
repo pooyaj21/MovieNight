@@ -5,9 +5,13 @@ import com.example.core.model.Movie
 
 interface MovieListRepository {
 
-    fun insertFirstList(list: List<Movie>): List<Movie>?
+    fun insertFoundedList(list: List<Movie>): List<Movie>
 
-    fun insertSecondList(list: List<Movie>): List<Movie>?
+    fun insertFirstList(list: List<Movie>): List<Movie>
+
+    fun insertSecondList(list: List<Movie>): List<Movie>
+
+    fun getFoundedList(): List<Movie>?
 
     fun getCountCompletedList(): Int
 
@@ -18,14 +22,23 @@ internal class MovieListRepositoryImpl(
     private val movieLists: MovieLists
 ) : MovieListRepository {
 
-    override fun insertFirstList(list: List<Movie>): List<Movie>? {
-        movieLists.firstList = list
-        return movieLists.firstList
+    override fun insertFoundedList(list: List<Movie>): List<Movie> {
+        movieLists.foundedList = list
+        return list
     }
 
-    override fun insertSecondList(list: List<Movie>): List<Movie>? {
+    override fun insertFirstList(list: List<Movie>): List<Movie> {
+        movieLists.firstList = list
+        return list
+    }
+
+    override fun insertSecondList(list: List<Movie>): List<Movie> {
         movieLists.secondList = list
-        return movieLists.secondList
+        return list
+    }
+
+    override fun getFoundedList(): List<Movie>? {
+        return movieLists.foundedList
     }
 
     override fun getCountCompletedList(): Int {

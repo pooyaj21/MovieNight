@@ -18,8 +18,17 @@ class StartFragment : Fragment() {
         return StartView(
             requireContext(),
             onNextClick = { firstName, secondName ->
-                findNavController().navigate(R.id.selectMovieFragment)
+                val bundle = Bundle()
+                bundle.putString(FIRST_NAME, firstName)
+                bundle.putString(SECOND_NAME, secondName)
+
+                findNavController().navigate(R.id.nameFragment, bundle)
             }
         )
+    }
+
+    companion object {
+        const val FIRST_NAME = "FIRST_NAME"
+        const val SECOND_NAME = "SECOND_NAME"
     }
 }

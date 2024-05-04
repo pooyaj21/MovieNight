@@ -17,6 +17,14 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nameFragment"
+        android:name="com.example.movienight.screen.startConfirmation.NameFragment"
+        android:label="NameFragment">
+        <argument android:name="firstName" app:argType="string"/>
+        <argument android:name="secondName" app:argType="string"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/selectMovieFragment"
         android:name="com.example.movienight.screen.selectMovie.SelectMovieFragment"
         android:label="SelectMovieFragment">

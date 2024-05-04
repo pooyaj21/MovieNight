@@ -50,27 +50,26 @@ class SelectMovieView(
 
         })
     }
+    private val notFeelingItTextView = TextView(context).apply {
+        text = "<- Not Feeling It"
+        gravity = Gravity.START
 
-    private val imDownTextView = TextView(context).apply {
-        text = "<- I'm Down"
-        gravity = Gravity.LEFT
         setTextColor(Color.WHITE)
     }
-    private val notFeelingItTextView = TextView(context).apply {
-        text = "Not Feeling It ->"
-        gravity = Gravity.RIGHT
-
+    private val imDownTextView = TextView(context).apply {
+        text = "I'm Down ->"
+        gravity = Gravity.END
         setTextColor(Color.WHITE)
     }
     private val actionBar = LinearLayout(context).apply {
         orientation = HORIZONTAL
         gravity = Gravity.CENTER
         addView(
-            imDownTextView,
+            notFeelingItTextView,
             LayoutParams((Screen.size.width * 0.4).toInt(), LayoutParams.WRAP_CONTENT)
         )
         addView(
-            notFeelingItTextView,
+            imDownTextView,
             LayoutParams((Screen.size.width * 0.4).toInt(), LayoutParams.WRAP_CONTENT)
         )
     }
