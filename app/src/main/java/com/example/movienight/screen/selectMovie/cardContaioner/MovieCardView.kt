@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.example.core.model.Movie
+import com.example.movienight.R
 import com.example.movienight.exctation.dpToPx
 import com.example.movienight.exctation.load
 
@@ -16,7 +17,7 @@ import com.example.movienight.exctation.load
 class MovieCardView(movie: Movie, context: Context) : CardView(context) {
     private val image = ImageView(context).apply {
         scaleType = ImageView.ScaleType.CENTER
-        load(movie.posterImage)
+        load(movie.posterImage, R.drawable.place_holder)
     }
     private val title = TextView(context).apply {
         text = movie.title
