@@ -17,9 +17,8 @@ import com.example.movienight.screen.selectMovie.cardContaioner.CardContainerAda
 class SelectMovieView(context: Context) : LinearLayout(context) {
     private val cardContainer = CardContainer(context, null).apply {
         isVisible = false
-        margin = 3.px
-        marginTop = 6.px
-        maxStackSize = 5
+        margin = 30.px
+        maxStackSize = 6
     }
 
     private val imDownTextView = TextView(context).apply {

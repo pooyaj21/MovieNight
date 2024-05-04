@@ -3,13 +3,13 @@ package com.example.movienight.screen.selectMovie.cardContaioner
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.view.Gravity
-import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.example.core.model.Movie
 import com.example.movienight.R
+import com.example.movienight.Screen
 import com.example.movienight.exctation.dpToPx
 import com.example.movienight.exctation.load
 
@@ -19,24 +19,35 @@ class MovieCardView(movie: Movie, context: Context) : CardView(context) {
         scaleType = ImageView.ScaleType.CENTER
         load(movie.posterImage, R.drawable.place_holder)
     }
-    private val title = TextView(context).apply {
+    private val name = TextView(context).apply {
         text = movie.title
-        textSize = 5.dpToPx.toFloat()
+        textSize = 6.dpToPx.toFloat()
         setTextColor(Color.WHITE)
+        setPadding(5.dpToPx, 0, 0, 0)
+    }
+    private val description = TextView(context).apply {
+        text = movie.overview
+        textSize = 4.dpToPx.toFloat()
+        setTextColor(Color.WHITE)
+        setPadding(5.dpToPx, 0, 0, 0)
     }
 
+
     init {
-        val frameLayout = FrameLayout(context).apply {
+        setCardBackgroundColor(resources.getColor(R.color.gray))
+        val contentView = LinearLayout(context).apply {
+            val cardHeight = (Screen.size.height * 0.8).toInt()
+            orientation = LinearLayout.VERTICAL
             val imageLayoutParams =
-                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+                LayoutParams(LayoutParams.MATCH_PARENT, (cardHeight * 0.7).toInt())
             val titleLayoutParams =
-                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
-                    gravity = Gravity.BOTTOM
-                    setMargins(5.dpToPx, 0, 5.dpToPx, 10.dpToPx)
-                }
+                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            val descriptionLayoutParams =
+                LayoutParams(LayoutParams.MATCH_PARENT, (cardHeight * 0.15).toInt())
             addView(image, imageLayoutParams)
-            addView(title, titleLayoutParams)
+            addView(name, titleLayoutParams)
+            addView(description, descriptionLayoutParams)
         }
-        addView(frameLayout, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+        addView(contentView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
     }
 }
