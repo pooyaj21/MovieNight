@@ -12,5 +12,12 @@ val appKoinModule = module {
 
     viewModel { SplashViewModel() }
 
-    viewModel { SelectMovieViewModel(getListPopularMoviesUseCase = get()) }
+    viewModel {
+        SelectMovieViewModel(
+            getListPopularMoviesUseCase = get(),
+            getCountOfListCompletedUseCase = get(),
+            insertFirstMoviesListUseCase = get(),
+            insertSecondMoviesListUseCase = get()
+        )
+    }
 }

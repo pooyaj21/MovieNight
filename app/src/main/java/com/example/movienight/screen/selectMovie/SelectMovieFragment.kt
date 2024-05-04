@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.movienight.R
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,15 +23,26 @@ class SelectMovieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        selectMovieView = SelectMovieView(requireContext())
+        selectMovieView = SelectMovieView(
+            requireContext(),
+            onSwipeCompleted = { favorite ->
+                viewModel.listEnded(favorite)
+            }
+        )
         return selectMovieView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.taskFlow.onEach {
-            when (it) {
-                is SelectMovieTask.ListFound -> selectMovieView?.submitList(it.movies)
+        viewModel.taskFlow.onEach { task ->
+            when (task) {
+                is SelectMovieTask.ListFound -> selectMovieView?.submitList(task.movies)
+                SelectMovieTask.NextList -> {
+                    findNavController().navigate(R.id.selectMovieFragment)
+                }
+                SelectMovieTask.GoNext -> {
+                    //TODO:navigate to next page
+                }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }

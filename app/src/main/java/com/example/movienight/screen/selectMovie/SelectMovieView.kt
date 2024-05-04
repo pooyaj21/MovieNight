@@ -1,12 +1,16 @@
 package com.example.movienight.screen.selectMovie
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.asynctaskcoffee.cardstack.CardContainer
+import com.asynctaskcoffee.cardstack.CardListener
 import com.asynctaskcoffee.cardstack.px
 import com.example.core.model.Movie
 import com.example.movienight.Screen
@@ -14,11 +18,37 @@ import com.example.movienight.exctation.dpToPx
 import com.example.movienight.screen.selectMovie.cardContaioner.CardContainerAdapter
 
 
-class SelectMovieView(context: Context) : LinearLayout(context) {
+@SuppressLint("ViewConstructor")
+class SelectMovieView(
+    context: Context,
+    onSwipeCompleted: (List<Movie>) -> Unit
+) : LinearLayout(context) {
+
+    private var theList = listOf<Movie>()
+    private val favoriteList = mutableListOf<Movie>()
+
     private val cardContainer = CardContainer(context, null).apply {
         isVisible = false
         margin = 30.px
         maxStackSize = 6
+
+        setOnCardActionListener(object : CardListener {
+            override fun onItemShow(position: Int, model: Any) {}
+
+            override fun onLeftSwipe(position: Int, model: Any) {}
+
+            override fun onRightSwipe(position: Int, model: Any) {
+                favoriteList.add(theList[position])
+                Log.d(ContentValues.TAG, "Movie added to favorite: ${theList[position]}")
+            }
+
+            override fun onSwipeCancel(position: Int, model: Any) {}
+
+            override fun onSwipeCompleted() {
+                onSwipeCompleted(favoriteList)
+            }
+
+        })
     }
 
     private val imDownTextView = TextView(context).apply {
@@ -77,6 +107,7 @@ class SelectMovieView(context: Context) : LinearLayout(context) {
     }
 
     fun submitList(list: List<Movie>) {
+        theList = list
         adapter.submitList(list)
         cardContainer.notifyAppendData()
         cardContainer.isVisible = true
