@@ -41,7 +41,7 @@ class SelectMovieFragment : Fragment() {
                     findNavController().navigate(R.id.nameFragment)
                 }
                 SelectMovieTask.GoNext -> {
-                    //TODO:navigate to next page
+                    findNavController().navigate(R.id.rollFragment)
                 }
                 null -> {
                     selectMovieView?.loading()

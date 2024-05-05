@@ -28,4 +28,10 @@
         android:label="SelectMovieFragment">
     </fragment>
 
+    <fragment
+        android:id="@+id/rollFragment"
+        android:name="com.example.movienight.screen.rollForKnowledge.RollFragment"
+        android:label="RollFragment">
+    </fragment>
+
 </navigation>

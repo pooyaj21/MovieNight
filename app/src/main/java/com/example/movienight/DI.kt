@@ -1,6 +1,7 @@
 package com.example.movienight
 
 import com.example.core.di.coreDiModule
+import com.example.movienight.screen.rollForKnowledge.RollViewModel
 import com.example.movienight.screen.selectMovie.SelectMovieViewModel
 import com.example.movienight.screen.splash.SplashViewModel
 import com.example.movienight.screen.start.StartViewModel
@@ -33,6 +34,14 @@ val appKoinModule = module {
             getCountOfListCompletedUseCase = get(),
             getFirstNameUseCase = get(),
             getSecondNameUseCase = get()
+        )
+    }
+
+    viewModel {
+        RollViewModel(
+            getFirstNameUseCase = get(),
+            getSecondNameUseCase = get(),
+            getMatchingMoviesUseCase = get()
         )
     }
 
