@@ -34,12 +34,12 @@ class MovieCardView(movie: Movie, context: Context) : CardView(context) {
 
 
     init {
-        setCardBackgroundColor(resources.getColor(R.color.gray))
+        setBackgroundColor(resources.getColor(R.color.gray))
         val contentView = LinearLayout(context).apply {
             val cardHeight = (Screen.size.height * 0.8).toInt()
             orientation = LinearLayout.VERTICAL
             val imageLayoutParams =
-                LayoutParams(LayoutParams.MATCH_PARENT, (cardHeight * 0.7).toInt())
+                LayoutParams((Screen.size.width * 0.8).toInt(), (cardHeight * 0.7).toInt())
             val titleLayoutParams =
                 LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             val descriptionLayoutParams =
