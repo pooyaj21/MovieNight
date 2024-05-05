@@ -2,6 +2,8 @@ package com.example.movienight
 
 import android.app.Application
 import android.util.Log
+import com.example.movienight.architect.ActivityLifeCycleLogger
+import com.example.movienight.architect.FragmentLifecycleLogger
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -21,9 +23,8 @@ class MoveNight : Application() {
             modules(appKoinModule)
         }
         // Setup Lifecycle Logger
-//        registerActivityLifecycleCallbacks(ActivityLifeCycleLogger())
-//        registerActivityLifecycleCallbacks(FragmentLifecycleLogger.Build())
-        //TODO :add this
+        registerActivityLifecycleCallbacks(ActivityLifeCycleLogger())
+        registerActivityLifecycleCallbacks(FragmentLifecycleLogger.Build())
 
         val dexOutputDir: File = codeCacheDir
         dexOutputDir.setReadOnly()

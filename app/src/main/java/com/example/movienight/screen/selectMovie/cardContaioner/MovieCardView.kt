@@ -3,6 +3,7 @@ package com.example.movienight.screen.selectMovie.cardContaioner
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -39,7 +40,9 @@ class MovieCardView(movie: Movie, context: Context) : CardView(context) {
             val cardHeight = (Screen.size.height * 0.8).toInt()
             orientation = LinearLayout.VERTICAL
             val imageLayoutParams =
-                LayoutParams((Screen.size.width * 0.8).toInt(), (cardHeight * 0.7).toInt())
+                LayoutParams((Screen.size.width * 0.9).toInt(), (cardHeight * 0.7).toInt()).apply {
+                    gravity = Gravity.CENTER
+                }
             val titleLayoutParams =
                 LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             val descriptionLayoutParams =

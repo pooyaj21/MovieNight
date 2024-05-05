@@ -37,6 +37,7 @@ class NameFragment : Fragment() {
         viewModel.taskFlow.onEach { task ->
             when (task) {
                 is NameTask.ChosenName -> nameView?.setName(arguments?.getString(task.tag) ?: "")
+                null -> {}
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }

@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.asynctaskcoffee.cardstack.CardContainer
 import com.asynctaskcoffee.cardstack.CardListener
-import com.asynctaskcoffee.cardstack.px
 import com.example.core.model.Movie
 import com.example.movienight.Screen
 import com.example.movienight.exctation.dpToPx
@@ -29,8 +28,6 @@ class SelectMovieView(
 
     private val cardContainer = CardContainer(context, null).apply {
         isVisible = false
-        margin = 30.px
-        maxStackSize = 6
 
         setOnCardActionListener(object : CardListener {
             override fun onItemShow(position: Int, model: Any) {}
