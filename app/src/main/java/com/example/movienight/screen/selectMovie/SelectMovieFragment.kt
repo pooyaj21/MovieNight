@@ -43,7 +43,9 @@ class SelectMovieFragment : Fragment() {
                 SelectMovieTask.GoNext -> {
                     //TODO:navigate to next page
                 }
-                null -> {}
+                null -> {
+                    selectMovieView?.loading()
+                }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
