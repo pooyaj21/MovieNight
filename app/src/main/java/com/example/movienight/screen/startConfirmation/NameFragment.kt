@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class NameFragment : Fragment() {
 
     private val viewModel: NameViewModel by viewModel()
@@ -36,7 +37,7 @@ class NameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.taskFlow.onEach { task ->
             when (task) {
-                is NameTask.ChosenName -> nameView?.setName(arguments?.getString(task.tag) ?: "")
+                is NameTask.ChosenName -> nameView?.setName(task.name ?: "")
                 null -> {}
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

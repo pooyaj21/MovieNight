@@ -1,8 +1,11 @@
 package com.example.core.di
 
 import com.example.core.data.local.rao.MovieLists
+import com.example.core.data.local.rao.Names
 import com.example.core.data.local.repository.MovieListRepository
 import com.example.core.data.local.repository.MovieListRepositoryImpl
+import com.example.core.data.local.repository.NamesRepository
+import com.example.core.data.local.repository.NamesRepositoryImpl
 import com.example.core.data.remote.repository.MovieRepository
 import com.example.core.data.remote.repository.MovieRepositoryImpl
 import com.example.core.domain.usecase.*
@@ -21,13 +24,17 @@ val coreDiModule = module {
     factory { get<ServiceProvider>().provide(MovieService::class) }
 
     // Data
+    single { MovieLists() }
+
+    single { Names() }
+
     factory<MovieRepository> { MovieRepositoryImpl(movieService = get()) }
 
     factory<MovieListRepository> { MovieListRepositoryImpl(movieLists = get()) }
 
-    // Domain
-    single { MovieLists() }
+    factory<NamesRepository> { NamesRepositoryImpl(names = get()) }
 
+    // Domain
     factory<GetListPopularMoviesUseCase> {
         GetListPopularMoviesUseCaseImpl(
             movieRepository = get(),
@@ -74,6 +81,24 @@ val coreDiModule = module {
     factory<InsertFoundedMoviesListUseCase> {
         InsertFoundedMoviesListUseCaseImpl(
             movieListRepository = get()
+        )
+    }
+
+    factory<InsertNamesUseCase> {
+        InsertNamesUseCaseImpl(
+            namesRepository = get()
+        )
+    }
+
+    factory<GetFirstNameUseCase> {
+        GetFirstNameUseCaseImpl(
+            namesRepository = get()
+        )
+    }
+
+    factory<GetSecondNameUseCase> {
+        GetSecondNameUseCaseImpl(
+            namesRepository = get()
         )
     }
 }
