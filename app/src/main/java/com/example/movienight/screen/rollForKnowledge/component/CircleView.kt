@@ -15,7 +15,7 @@ class CircleView(context: Context, private val items: List<Movie>) : View(contex
     private val slicePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val linePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = resources.getColor(R.color.black)
-        strokeWidth = 5f // Adjust line thickness as needed
+        strokeWidth = 5f
         style = Paint.Style.STROKE
     }
     private val bounds: RectF = RectF()
@@ -61,7 +61,7 @@ class CircleView(context: Context, private val items: List<Movie>) : View(contex
             val textHalfWidth = textWidth / 2
             val sliceHalfWidth =
                 radius * sin(Math.toRadians(sweepAngle.toDouble() / 2)).toFloat()
-                if (textHalfWidth > sliceHalfWidth)  textPaint.textSize = 10f
+            if (textHalfWidth > sliceHalfWidth) textPaint.textSize = 20f
 
             // Apply rotation transformation to canvas
             canvas.save()

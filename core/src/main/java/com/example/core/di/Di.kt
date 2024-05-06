@@ -101,4 +101,11 @@ val coreDiModule = module {
             namesRepository = get()
         )
     }
+
+    factory<GetGenresNameUseCase> {
+        GetGenresNameUseCaseImpl(
+            movieRepository = get(),
+            dispatcherProvider = get()
+        )
+    }
 }
