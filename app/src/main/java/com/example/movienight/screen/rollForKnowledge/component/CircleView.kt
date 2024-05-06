@@ -12,7 +12,12 @@ import kotlin.math.sin
 @SuppressLint("ViewConstructor")
 class CircleView(context: Context, private val items: List<Movie>) : View(context) {
 
-    private val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val slicePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val linePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = resources.getColor(R.color.black)
+        strokeWidth = 5f // Adjust line thickness as needed
+        style = Paint.Style.STROKE
+    }
     private val bounds: RectF = RectF()
     private val textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
@@ -29,9 +34,16 @@ class CircleView(context: Context, private val items: List<Movie>) : View(contex
             val sweepAngle = 360f / items.size
 
             // Draw the slice
-            paint.color = resources.getColor(getRandomColor(index))
+            slicePaint.color = resources.getColor(getRandomColor(index))
             bounds.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius)
-            canvas.drawArc(bounds, startAngle, sweepAngle, true, paint)
+            canvas.drawArc(bounds, startAngle, sweepAngle, true, slicePaint)
+
+            // Draw the line
+            val lineEndX =
+                centerX + radius * cos(Math.toRadians(startAngle + sweepAngle.toDouble())).toFloat()
+            val lineEndY =
+                centerY + radius * sin(Math.toRadians(startAngle + sweepAngle.toDouble())).toFloat()
+            canvas.drawLine(centerX, centerY, lineEndX, lineEndY, linePaint)
 
             // Draw the text
             val name = movie.title
@@ -44,7 +56,16 @@ class CircleView(context: Context, private val items: List<Movie>) : View(contex
             val textY =
                 centerY + radius / 2 * sin(Math.toRadians(startAngle + sweepAngle / 2.toDouble()))
                     .toFloat() + textPaint.textSize / 2 // Center vertically
+
+            // Apply rotation transformation to canvas
+            canvas.save()
+            canvas.rotate(startAngle + sweepAngle / 2, textX + textWidth / 2, textY)
+
+            // Draw the text with the rotation
             canvas.drawText(name, textX, textY, textPaint)
+
+            // Restore canvas to original state
+            canvas.restore()
 
             startAngle += sweepAngle
         }

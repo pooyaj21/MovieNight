@@ -27,8 +27,8 @@ class WheelView(context: Context, list: List<Movie>) : ConstraintLayout(context)
         addView(
             arrowView,
             LayoutParams(
-                (Screen.size.height * 0.3).toInt(),
-                (Screen.size.height * 0.3).toInt()
+                (Screen.size.height * 0.2).toInt(),
+                (Screen.size.height * 0.2).toInt()
             )
         )
 
