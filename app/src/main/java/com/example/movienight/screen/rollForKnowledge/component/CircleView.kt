@@ -57,12 +57,19 @@ class CircleView(context: Context, private val items: List<Movie>) : View(contex
                 centerY + radius / 2 * sin(Math.toRadians(startAngle + sweepAngle / 2.toDouble()))
                     .toFloat() + textPaint.textSize / 2 // Center vertically
 
+            // Check if the text width is larger than half of the circle width
+            val textHalfWidth = textWidth / 2
+            val sliceHalfWidth =
+                radius * sin(Math.toRadians(sweepAngle.toDouble() / 2)).toFloat()
+            val textPositionX =
+                if (textHalfWidth > sliceHalfWidth) centerX + radius * 0.9f else textX
+
             // Apply rotation transformation to canvas
             canvas.save()
-            canvas.rotate(startAngle + sweepAngle / 2, textX + textWidth / 2, textY)
+            canvas.rotate(startAngle + sweepAngle / 2, textPositionX + textHalfWidth, textY)
 
             // Draw the text with the rotation
-            canvas.drawText(name, textX, textY, textPaint)
+            canvas.drawText(name, textPositionX, textY, textPaint)
 
             // Restore canvas to original state
             canvas.restore()
