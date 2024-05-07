@@ -23,12 +23,19 @@ class SelectMovieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        selectMovieView = SelectMovieView(
-            requireContext(),
-            onSwipeCompleted = { favorite ->
-                viewModel.listEnded(favorite)
-            }
-        )
+        if (selectMovieView == null) {
+            selectMovieView = SelectMovieView(
+                requireContext(),
+                onSwipeCompleted = { favorite ->
+                    viewModel.listEnded(favorite)
+                },
+                onMovieClickListener = { movie ->
+                    findNavController().navigate(
+                        SelectMovieFragmentDirections.actionMovieDetailSelectMovieFragment(movie)
+                    )
+                }
+            )
+        }
         return selectMovieView
     }
 

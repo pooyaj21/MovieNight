@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,15 +17,22 @@ class RollFragment : Fragment() {
 
     private var rollView: RollView? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rollView = RollView(
-            requireContext()
-        )
+        if (rollView == null) {
+            rollView = RollView(
+                requireContext(),
+                onMovieSelect = { movie ->
+                    findNavController().navigate(
+                        RollFragmentDirections.actionMovieDetailSelectMovieFragment(movie)
+                    )
+                    viewModel.movieFounded()
+                }
+            )
+        }
         return rollView
     }
 
@@ -35,6 +43,7 @@ class RollFragment : Fragment() {
                 is RollTask.DataCompleted -> {
                     rollView?.success(task.firstName, task.secondName, task.list)
                 }
+                RollTask.MovieFounded -> {}
                 null -> {}
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

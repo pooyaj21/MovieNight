@@ -24,7 +24,8 @@ import com.example.movienight.screen.selectMovie.cardContaioner.CardContainerAda
 @SuppressLint("ViewConstructor")
 class SelectMovieView(
     context: Context,
-    onSwipeCompleted: (List<Movie>) -> Unit
+    onSwipeCompleted: (List<Movie>) -> Unit,
+    onMovieClickListener: (Movie) -> Unit
 ) : FrameLayout(context) {
 
     private var theList = listOf<Movie>()
@@ -80,7 +81,7 @@ class SelectMovieView(
     }
     private val loadingView = AppLoadingView(context)
 
-    private val adapter = CardContainerAdapter(context)
+    private val adapter = CardContainerAdapter(context, onMovieClickListener)
 
     init {
         contentView.apply {

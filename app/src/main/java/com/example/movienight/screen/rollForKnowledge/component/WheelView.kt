@@ -7,6 +7,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.animation.doOnEnd
 import com.example.core.model.Movie
 import com.example.movienight.R
 import com.example.movienight.Screen
@@ -99,35 +100,32 @@ class WheelView(context: Context, list: List<Movie>) : ConstraintLayout(context)
         constraintSet.applyTo(this)
     }
 
-    fun spinArrow(desiredPosition: Float) {
+    fun spinArrow(desiredPosition: Float, onRollComplete: () -> Unit) {
         val fullCircle = 360f
         val totalSpins = 8
         val targetRotation = fullCircle * totalSpins
         val durationMillis = 3000L
 
         // Create an ObjectAnimator to animate the rotation of the bottle
-        val bottleAnimator =
-            ObjectAnimator.ofFloat(this.arrowView, "rotation", 0f, targetRotation).apply {
-                duration = durationMillis
-                interpolator =
-                    LinearInterpolator() // Ensure constant speed throughout the animation
-            }
-
-        // Calculate the desired position based on the number of spins
         val stopRotation = (360 * (totalSpins - 1)) + desiredPosition
 
-        // Add an update listener to stop the animation precisely at the desired position
-        bottleAnimator.addUpdateListener { animation ->
-            val currentRotation = animation.animatedValue as Float
+        ObjectAnimator.ofFloat(this.arrowView, "rotation", 0f, targetRotation).apply {
+            duration = durationMillis
+            interpolator =
+                LinearInterpolator() // Ensure constant speed throughout the animation
+        }.apply {
+            addUpdateListener { animation ->
+                val currentRotation = animation.animatedValue as Float
 
-            // Check if the bottle rotation exceeds or reaches the desired position
-            if (currentRotation >= stopRotation) {
-                // Stop the spinning animation
-                bottleAnimator.cancel()
+                // Check if the bottle rotation exceeds or reaches the desired position
+                if (currentRotation >= stopRotation) {
+                    // Stop the spinning animation
+                    cancel()
+                }
             }
-        }
-
-        // Start the bottle spinning animation
-        bottleAnimator.start()
+            doOnEnd {
+                onRollComplete.invoke()
+            }
+        }.start()
     }
 }

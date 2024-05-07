@@ -24,4 +24,10 @@ class RollViewModel(
             )
         }
     }
+
+    fun movieFounded() {
+        viewModelScope.launch {
+            setTask(RollTask.MovieFounded)
+        }
+    }
 }

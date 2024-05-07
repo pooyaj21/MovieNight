@@ -1,6 +1,7 @@
 package com.example.core.data.remote.repository
 
 import com.example.core.data.remote.extension.mapDataIfSuccess
+import com.example.core.data.remote.extension.mapGenresIfSuccess
 import com.example.core.data.remote.mapper.map
 import com.example.core.model.BaseListModel
 import com.example.core.model.Genre
@@ -27,7 +28,7 @@ internal class MovieRepositoryImpl(
 
     override suspend fun genres(): NightResult<BaseListModel<Genre>> {
         return safeApiCall { movieService.genres() }
-            .mapDataIfSuccess { result -> result.map() }
+            .mapGenresIfSuccess { result -> result.map() }
     }
 
 }

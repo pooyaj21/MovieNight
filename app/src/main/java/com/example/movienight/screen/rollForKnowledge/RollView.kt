@@ -1,5 +1,6 @@
 package com.example.movienight.screen.rollForKnowledge
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Color
@@ -11,7 +12,11 @@ import com.example.movienight.exctation.dpToPx
 import com.example.movienight.screen.rollForKnowledge.component.WheelView
 import kotlin.random.Random
 
-class RollView(context: Context) : LinearLayout(context) {
+@SuppressLint("ViewConstructor")
+class RollView(
+    context: Context,
+    private val onMovieSelect: (Movie) -> Unit
+) : LinearLayout(context) {
     private val titleTextView = TextView(context).apply {
         text = "Your fate will be chosen now!!"
         setTextColor(Color.WHITE)
@@ -32,13 +37,18 @@ class RollView(context: Context) : LinearLayout(context) {
 
     fun success(firstName: String?, secondName: String?, list: List<Movie>?) {
         nameTextView.text = "${firstName ?: ""}\n&\n${secondName ?: ""}"
-        val size = list?.size ?: 0
-        val theChosenOne = Random.nextInt(size)
-        Log.d(TAG, "The chosen one is:${list?.get(theChosenOne) ?: ""}")
-        val sliceDegree = 360 / size
-        val theChosenOneMidDegree = (sliceDegree * (theChosenOne)) + (sliceDegree / 2)
-        val wheelView = WheelView(context, list ?: listOf())
-        wheelView.spinArrow(theChosenOneMidDegree.toFloat())
-        addView(wheelView)
+        list?.let {
+            val size = list.size
+            val theChosenOneNumber = Random.nextInt(size)
+            val theChosenOneMovie = list.get(theChosenOneNumber)
+            Log.d(TAG, "The chosen one is:${theChosenOneMovie}")
+            val sliceDegree = 360 / size
+            val theChosenOneMidDegree = (sliceDegree * (theChosenOneNumber)) + (sliceDegree / 2)
+            val wheelView = WheelView(context, list)
+            wheelView.spinArrow(theChosenOneMidDegree.toFloat()) {
+                onMovieSelect(theChosenOneMovie)
+            }
+            addView(wheelView)
+        }
     }
 }

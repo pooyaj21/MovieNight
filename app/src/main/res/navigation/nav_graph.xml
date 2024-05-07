@@ -26,12 +26,36 @@
         android:id="@+id/selectMovieFragment"
         android:name="com.example.movienight.screen.selectMovie.SelectMovieFragment"
         android:label="SelectMovieFragment">
+        <action
+            android:id="@+id/action_movie_detail_selectMovieFragment"
+            app:destination="@id/movieDetailFragment">
+            <argument
+                android:name="movie"
+                app:argType="com.example.core.model.Movie" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/rollFragment"
         android:name="com.example.movienight.screen.rollForKnowledge.RollFragment"
         android:label="RollFragment">
+        <action
+            android:id="@+id/action_movie_detail_selectMovieFragment"
+            app:destination="@id/movieDetailFragment">
+            <argument
+                android:name="movie"
+                app:argType="com.example.core.model.Movie" />
+        </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.movienight.screen.movieDetail.MovieDetailFragment"
+        android:label="MovieDetailFragment">
+        <argument
+            android:name="movie"
+            app:argType="com.example.core.model.Movie" />
+    </fragment>
+
 
 </navigation>

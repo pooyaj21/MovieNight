@@ -20,7 +20,7 @@ fun <T, R> NightResult<BaseListResponse<T>>.mapDataIfSuccess(
     }
 }
 
-fun <R> NightResult<GenresListResponse>.mapDataIfSuccess(
+fun <R> NightResult<GenresListResponse>.mapGenresIfSuccess(
     transform: (data: GenresListResponse.GenreResponse) -> R
 ): NightResult<BaseListModel<R>> {
     return mapIfSuccess {
