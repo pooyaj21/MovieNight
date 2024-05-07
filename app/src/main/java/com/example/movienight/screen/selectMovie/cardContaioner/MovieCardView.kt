@@ -51,7 +51,7 @@ class MovieCardView(
         orientation = VERTICAL
         val cardHeight = (Screen.size.height * 0.8).toInt()
         val imageLayoutParams =
-            LayoutParams(LayoutParams.MATCH_PARENT, (cardHeight * 0.7).toInt())
+            LayoutParams((Screen.size.width * 0.9).toInt(), (cardHeight * 0.7).toInt())
         val titleLayoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         val descriptionLayoutParams =
