@@ -19,10 +19,6 @@ class SelectMovieViewModel(
 
 
     init {
-        getMovies()
-    }
-
-    fun getMovies(){
         viewModelScope.launch {
             val founded = getFoundedMoviesUseCase()
             if (founded == null) {

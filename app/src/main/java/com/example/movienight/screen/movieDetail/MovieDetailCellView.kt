@@ -7,7 +7,6 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
-import com.example.core.model.Movie
 import com.example.movienight.R
 import com.example.movienight.Screen
 import com.example.movienight.exctation.dpToPx
@@ -50,6 +49,7 @@ class MovieDetailCellView(context: Context) : LinearLayout(context) {
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         )
     }
+    private val genresView = GenresView(context)
     private val ratingBar = RatingBar(context).apply {
         numStars = 5
         setIsIndicator(true)
@@ -82,6 +82,12 @@ class MovieDetailCellView(context: Context) : LinearLayout(context) {
             }
         )
         addView(
+            genresView,
+            LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
+                setMargins(MAIN_MARGIN, MAIN_MARGIN, MAIN_MARGIN, 0)
+            }
+        )
+        addView(
             ratingBar,
             LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
                 setMargins(MAIN_MARGIN, MAIN_MARGIN, MAIN_MARGIN, 0)
@@ -89,11 +95,12 @@ class MovieDetailCellView(context: Context) : LinearLayout(context) {
         )
     }
 
-    fun success(movie: Movie) {
-        imageView.load(movie.backdropImage, R.drawable.place_holder)
-        titleTextView.text = movie.title
-        descriptionTextView.text = movie.overview
-        ratingBar.rating = (movie.voteAverage / 2).toFloat()
+    fun success(uiMovie: UiMovie) {
+        imageView.load(uiMovie.backdropImage, R.drawable.place_holder)
+        titleTextView.text = uiMovie.title
+        descriptionTextView.text = uiMovie.overview
+        genresView.bindGenres(uiMovie.genres)
+        ratingBar.rating = (uiMovie.voteAverage / 2).toFloat()
     }
 
     companion object {
