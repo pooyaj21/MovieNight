@@ -44,13 +44,13 @@ class NameView(
             addView(
                 titleTextView,
                 LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                    setMargins(0,0,0,5.dpToPx)
+                    setMargins(0, 0, 0, 5.dpToPx)
                 }
             )
             addView(
                 nameTextView,
                 LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                    setMargins(0,0,0,10.dpToPx)
+                    setMargins(0, 0, 0, 10.dpToPx)
                 }
             )
             addView(
@@ -65,7 +65,8 @@ class NameView(
         addView(contentView, layoutParams)
     }
 
-    fun setName(name: String) {
-        nameTextView.text = name
+    fun setName(name: String?) {
+        if (name == null) nameTextView.text = "Your"
+        else nameTextView.text = name
     }
 }

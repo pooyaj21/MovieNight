@@ -23,6 +23,9 @@ class StartFragment : Fragment() {
             onNextClick = { firstName, secondName ->
                 viewModel.saveNames(firstName, secondName)
                 findNavController().navigate(R.id.nameFragment)
+            },
+            onSoloClick = {
+                findNavController().navigate(R.id.nameFragment)
             }
         )
     }

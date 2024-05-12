@@ -17,7 +17,8 @@ import com.example.movienight.exctation.dpToPx
 @SuppressLint("ViewConstructor")
 class StartView(
     context: Context,
-    private val onNextClick: (firstName: String, secondName: String) -> Unit
+    private val onNextClick: (firstName: String, secondName: String) -> Unit,
+    private val onSoloClick: () -> Unit
 ) : ConstraintLayout(context) {
 
     private val editTextSize = Screen.size.width * 0.8
@@ -54,6 +55,19 @@ class StartView(
             letsGo()
         }
     }
+    private val soloButton = Button(context).apply {
+        id = generateViewId()
+        background = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            setColor(resources.getColor(R.color.blue, resources.newTheme()))
+            setStroke(1.dpToPx, Color.WHITE)
+            cornerRadius = 12.dpToPx.toFloat()
+        }
+        text = "Solo Queue"
+        setOnClickListener {
+            onSoloClick()
+        }
+    }
 
 
     init {
@@ -62,58 +76,35 @@ class StartView(
         addView(andTextView, LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
         addView(secondNameEditText, LayoutParams(editTextSize.toInt(), WRAP_CONTENT))
         addView(letsGoButton, LayoutParams((editTextSize.toInt()) / 2, WRAP_CONTENT))
+        addView(soloButton, LayoutParams(((editTextSize.toInt()) / 1.5).toInt(), WRAP_CONTENT))
 
-        val constraints = ConstraintSet()
-        constraints.clone(this)
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(this)
 
         // first name EditText
-        constraints.connect(
-            firstNameEditText.id, START, PARENT_ID, START, 0
-        )
-        constraints.connect(
-            firstNameEditText.id, END, PARENT_ID, END, 0
-        )
-        constraints.connect(
-            firstNameEditText.id, TOP, PARENT_ID, TOP, 200.dpToPx
-        )
-
+        constraintSet.connect(firstNameEditText.id, START, PARENT_ID, START, 0)
+        constraintSet.connect(firstNameEditText.id, END, PARENT_ID, END, 0)
+        constraintSet.connect(firstNameEditText.id, TOP, PARENT_ID, TOP, 200.dpToPx)
         // & TextView
-        constraints.connect(
-            andTextView.id, START, firstNameEditText.id, START, 0
-        )
-        constraints.connect(
-            andTextView.id, END, firstNameEditText.id, END, 0
-        )
-        constraints.connect(
-            andTextView.id, TOP, firstNameEditText.id, BOTTOM, 20.dpToPx
-        )
-        constraints.connect(
-            andTextView.id, BOTTOM, secondNameEditText.id, TOP, 20.dpToPx
-        )
-
+        constraintSet.connect(andTextView.id, START, firstNameEditText.id, START, 0)
+        constraintSet.connect(andTextView.id, END, firstNameEditText.id, END, 0)
+        constraintSet.connect(andTextView.id, TOP, firstNameEditText.id, BOTTOM, 20.dpToPx)
+        constraintSet.connect(andTextView.id, BOTTOM, secondNameEditText.id, TOP, 20.dpToPx)
         // second name EditText
-        constraints.connect(
-            secondNameEditText.id, START, PARENT_ID, START, 0
-        )
-        constraints.connect(
-            secondNameEditText.id, END, PARENT_ID, END, 0
-        )
-        constraints.connect(
-            secondNameEditText.id, BOTTOM, letsGoButton.id, TOP, 10.dpToPx
-        )
-
+        constraintSet.connect(secondNameEditText.id, START, PARENT_ID, START, 0)
+        constraintSet.connect(secondNameEditText.id, END, PARENT_ID, END, 0)
+        constraintSet.connect(secondNameEditText.id, BOTTOM, letsGoButton.id, TOP, 10.dpToPx)
         // Let's Go Button
-        constraints.connect(
-            letsGoButton.id, START, PARENT_ID, START, 0
-        )
-        constraints.connect(
-            letsGoButton.id, END, PARENT_ID, END, 0
-        )
-        constraints.connect(
-            letsGoButton.id, TOP, secondNameEditText.id, BOTTOM, 150.dpToPx
-        )
+        constraintSet.connect(letsGoButton.id, START, PARENT_ID, START, 0)
+        constraintSet.connect(letsGoButton.id, END, PARENT_ID, END, 0)
+        constraintSet.connect(letsGoButton.id, TOP, secondNameEditText.id, BOTTOM, 130.dpToPx)
+        // Solo Button
+        constraintSet.connect(soloButton.id, START, PARENT_ID, START, 0)
+        constraintSet.connect(soloButton.id, END, PARENT_ID, END, 0)
+        constraintSet.connect(soloButton.id, TOP, letsGoButton.id, BOTTOM, 20.dpToPx)
 
-        constraints.applyTo(this)
+        constraintSet.applyTo(this)
+
     }
 
     private fun letsGo() {

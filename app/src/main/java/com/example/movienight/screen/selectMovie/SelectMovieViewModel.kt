@@ -10,6 +10,7 @@ import java.util.*
 
 class SelectMovieViewModel(
     private val getListPopularMoviesUseCase: GetListPopularMoviesUseCase,
+    private val getFirstNameUseCase: GetFirstNameUseCase,
     private val getFoundedMoviesUseCase: GetFoundedMoviesUseCase,
     private val insertFoundedMoviesListUseCase: InsertFoundedMoviesListUseCase,
     private val getCountOfListCompletedUseCase: GetCountOfListCompletedUseCase,
@@ -36,14 +37,20 @@ class SelectMovieViewModel(
 
     fun listEnded(favorites: List<Movie>) {
         viewModelScope.launch {
-            when (getCountOfListCompletedUseCase()) {
-                0 -> {
-                    insertFirstMoviesListUseCase(favorites)
-                    setTask(SelectMovieTask.NextList)
-                }
-                1 -> {
-                    insertSecondMoviesListUseCase(favorites)
-                    setTask(SelectMovieTask.GoNext)
+            if (getFirstNameUseCase() == null) {
+                insertFirstMoviesListUseCase(favorites)
+                setTask(SelectMovieTask.GoNext)
+            }
+            else {
+                when (getCountOfListCompletedUseCase()) {
+                    0 -> {
+                        insertFirstMoviesListUseCase(favorites)
+                        setTask(SelectMovieTask.NextList)
+                    }
+                    1 -> {
+                        insertSecondMoviesListUseCase(favorites)
+                        setTask(SelectMovieTask.GoNext)
+                    }
                 }
             }
         }

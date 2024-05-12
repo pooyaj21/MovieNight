@@ -46,9 +46,13 @@ internal class MovieListRepositoryImpl(
     }
 
     override fun getMatchingList(): List<Movie>? {
-        val firstList = movieLists.firstList ?: listOf()
-        val secondList = movieLists.secondList ?: listOf()
+        val firstList = movieLists.firstList ?: emptyList()
+        val secondList = movieLists.secondList ?: emptyList()
 
-        return firstList.intersect(secondList.toSet()).toList().ifEmpty { null }
+        return if (firstList.isEmpty() || secondList.isEmpty()) {
+            firstList.ifEmpty { secondList }
+        } else {
+            firstList.intersect(secondList.toSet()).toList().ifEmpty { null }
+        }
     }
 }
