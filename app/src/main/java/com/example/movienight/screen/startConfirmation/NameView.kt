@@ -43,11 +43,15 @@ class NameView(
             gravity = Gravity.CENTER
             addView(
                 titleTextView,
-                LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+                LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
+                    setMargins(0,0,0,5.dpToPx)
+                }
             )
             addView(
                 nameTextView,
-                LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+                LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
+                    setMargins(0,0,0,10.dpToPx)
+                }
             )
             addView(
                 goNextButton,
