@@ -43,19 +43,20 @@ class MovieCardView(
 
 
     init {
+        setBackgroundColor(Color.GRAY)
         background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
             setColor(Color.GRAY)
             cornerRadius = radius.toFloat()
         }
         orientation = VERTICAL
-        val cardHeight = (Screen.size.height * 0.8).toInt()
+        val cardHeight = Screen.size.height
         val imageLayoutParams =
             LayoutParams((Screen.size.width * 0.9).toInt(), (cardHeight * 0.7).toInt())
         val titleLayoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         val descriptionLayoutParams =
-            LayoutParams(LayoutParams.MATCH_PARENT, (cardHeight * 0.15).toInt())
+            LayoutParams(LayoutParams.MATCH_PARENT, (cardHeight * 0.1).toInt())
         addView(image, imageLayoutParams)
         addView(name, titleLayoutParams)
         addView(description, descriptionLayoutParams)

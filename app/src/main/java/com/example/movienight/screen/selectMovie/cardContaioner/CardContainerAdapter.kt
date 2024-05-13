@@ -8,8 +8,7 @@ import com.example.core.model.Movie
 class CardContainerAdapter(
     private val context: Context,
     private val onMovieClickListener: (Movie) -> Unit
-) :
-    CardContainerAdapter() {
+) : CardContainerAdapter() {
 
     private val list = mutableListOf<Movie>()
 

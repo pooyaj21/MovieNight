@@ -33,6 +33,7 @@ class SelectMovieView(
 
     private val cardContainer = CardContainer(context, null).apply {
         isVisible = false
+        margin = 30.dpToPx
 
         setOnCardActionListener(object : CardListener {
             override fun onItemShow(position: Int, model: Any) {}
@@ -85,25 +86,14 @@ class SelectMovieView(
 
     init {
         contentView.apply {
-            val actionBarLayoutParams = LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                (Screen.size.height * 0.1).toInt()
-            ).apply {
-                gravity = Gravity.CENTER
-                setPadding(5.dpToPx, 5.dpToPx, 5.dpToPx, 5.dpToPx)
-            }
             val cardContainerLayoutParams = LayoutParams(
                 LayoutParams.MATCH_PARENT,
-                (Screen.size.height * 0.8).toInt()
+                LayoutParams.MATCH_PARENT
             ).apply {
                 gravity = Gravity.CENTER
                 setPadding(5.dpToPx, 5.dpToPx, 5.dpToPx, 5.dpToPx)
             }
-
-            addView(
-                actionBar,
-                actionBarLayoutParams
-            )
+            cardContainer.addHeaderView(actionBar)
             addView(
                 cardContainer,
                 cardContainerLayoutParams
