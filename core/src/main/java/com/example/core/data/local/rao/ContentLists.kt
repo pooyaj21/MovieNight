@@ -9,4 +9,10 @@ internal class ContentLists {
 
     var firstList: List<Content>? = null
     var secondList: List<Content>? = null
+
+    fun resetLists(){
+        foundedList = null
+        firstList = null
+        secondList = null
+    }
 }

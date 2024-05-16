@@ -28,11 +28,13 @@ internal class ContentListRepositoryImpl(
 ) : ContentListRepository {
 
     override fun insertType(type: Content.Type): Content.Type {
+        contentLists.resetLists()
         contentLists.type = type
         return contentLists.type
     }
 
     override fun insertFoundedList(list: List<Content>): List<Content> {
+        contentLists.resetLists()
         contentLists.foundedList = list
         return list
     }
