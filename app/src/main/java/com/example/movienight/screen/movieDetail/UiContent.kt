@@ -1,12 +1,12 @@
 package com.example.movienight.screen.movieDetail
 
+import com.example.core.model.Content
 import com.example.core.model.Genre
 import com.example.core.model.Image
-import com.example.core.model.Movie
 
-data class UiMovie(
+data class UiContent(
     val id: Int,
-    val title: String,
+    val name: String,
     val genres: List<Genre>,
     val overview: String,
     val backdropImage: Image?,
@@ -14,10 +14,10 @@ data class UiMovie(
     val voteAverage: Double
 )
 
-fun Movie.toUiMovie(genres: List<Genre>): UiMovie {
-    return UiMovie(
+fun Content.toUiContent(genres: List<Genre>): UiContent {
+    return UiContent(
         id = id,
-        title = title,
+        name = name,
         genres = genres,
         overview = overview,
         backdropImage = backdropImage,

@@ -1,16 +1,16 @@
 package com.example.core.di
 
-import com.example.core.data.local.rao.MovieLists
+import com.example.core.data.local.rao.ContentLists
 import com.example.core.data.local.rao.Names
-import com.example.core.data.local.repository.MovieListRepository
-import com.example.core.data.local.repository.MovieListRepositoryImpl
-import com.example.core.data.local.repository.NamesRepository
+import com.example.core.data.local.repository.*
 import com.example.core.data.local.repository.NamesRepositoryImpl
-import com.example.core.data.remote.repository.MovieRepository
+import com.example.core.data.remote.repository.*
 import com.example.core.data.remote.repository.MovieRepositoryImpl
+import com.example.core.data.remote.repository.TvSeriesRepositoryImpl
 import com.example.core.domain.usecase.*
 import com.example.core.service.ServiceProvider
 import com.example.core.service.service.MovieService
+import com.example.core.service.service.TvSeriesService
 import com.example.core.shared.DefaultDispatcherProvider
 import com.example.core.shared.DispatcherProvider
 import org.koin.dsl.module
@@ -23,14 +23,18 @@ val coreDiModule = module {
     // Service
     factory { get<ServiceProvider>().provide(MovieService::class) }
 
+    factory { get<ServiceProvider>().provide(TvSeriesService::class) }
+
     // Data
-    single { MovieLists() }
+    single { ContentLists() }
 
     single { Names() }
 
     factory<MovieRepository> { MovieRepositoryImpl(movieService = get()) }
 
-    factory<MovieListRepository> { MovieListRepositoryImpl(movieLists = get()) }
+    factory<TvSeriesRepository> { TvSeriesRepositoryImpl(tvSeriesService = get()) }
+
+    factory<ContentListRepository> { ContentListRepositoryImpl(contentLists = get()) }
 
     factory<NamesRepository> { NamesRepositoryImpl(names = get()) }
 
@@ -42,45 +46,45 @@ val coreDiModule = module {
         )
     }
 
-    factory<GetMatchingMoviesUseCase> {
-        GetMatchingMoviesUseCaseImpl(
-            movieListRepository = get()
+    factory<GetMatchingContentContentsUseCase> {
+        GetMatchingContentContentsUseCaseImpl(
+            contentListRepository = get()
         )
     }
 
-    factory<InsertFoundedMoviesListUseCase> {
-        InsertFoundedMoviesListUseCaseImpl(
-            movieListRepository = get()
+    factory<InsertFoundedContentsListUseCase> {
+        InsertFoundedContentsListUseCaseImpl(
+            contentListRepository = get()
         )
     }
 
-    factory<InsertFirstMoviesListUseCase> {
-        InsertFirstMoviesListUseCaseImpl(
-            movieListRepository = get()
+    factory<InsertFirstContentsListUseCase> {
+        InsertFirstContentsListUseCaseImpl(
+            contentListRepository = get()
         )
     }
 
-    factory<InsertSecondMoviesListUseCase> {
-        InsertSecondMoviesListUseCaseImpl(
-            movieListRepository = get()
+    factory<InsertSecondContentsListUseCase> {
+        InsertSecondContentsListUseCaseImpl(
+            contentListRepository = get()
         )
     }
 
     factory<GetCountOfListCompletedUseCase> {
         GetCountOfListCompletedUseCaseImpl(
-            movieListRepository = get()
+            contentListRepository = get()
         )
     }
 
-    factory<GetFoundedMoviesUseCase> {
-        GetFoundedMoviesUseCaseImpl(
-            movieListRepository = get()
+    factory<GetFoundedContentsUseCase> {
+        GetFoundedContentsUseCaseImpl(
+            contentListRepository = get()
         )
     }
 
-    factory<InsertFoundedMoviesListUseCase> {
-        InsertFoundedMoviesListUseCaseImpl(
-            movieListRepository = get()
+    factory<InsertFoundedContentsListUseCase> {
+        InsertFoundedContentsListUseCaseImpl(
+            contentListRepository = get()
         )
     }
 

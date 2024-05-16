@@ -25,9 +25,9 @@ class RollFragment : Fragment() {
         if (rollView == null) {
             rollView = RollView(
                 requireContext(),
-                onMovieSelect = { movie ->
+                onContentSelect = { contetnt ->
                     findNavController().navigate(
-                        RollFragmentDirections.actionMovieDetailSelectMovieFragment(movie)
+                        RollFragmentDirections.actionContentDetailSelectContentFragment(contetnt)
                     )
                     viewModel.movieFounded()
                 }

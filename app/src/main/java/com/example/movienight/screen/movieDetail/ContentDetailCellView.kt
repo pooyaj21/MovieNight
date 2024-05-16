@@ -15,7 +15,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 
 
-class MovieDetailCellView(context: Context) : LinearLayout(context) {
+class ContentDetailCellView(context: Context) : LinearLayout(context) {
     private val imageView = ShapeableImageView(context).apply {
         shapeAppearanceModel = shapeAppearanceModel
             .toBuilder()
@@ -95,12 +95,12 @@ class MovieDetailCellView(context: Context) : LinearLayout(context) {
         )
     }
 
-    fun success(uiMovie: UiMovie) {
-        imageView.load(uiMovie.backdropImage, R.drawable.place_holder)
-        titleTextView.text = uiMovie.title
-        descriptionTextView.text = uiMovie.overview
-        genresView.bindGenres(uiMovie.genres)
-        ratingBar.rating = (uiMovie.voteAverage / 2).toFloat()
+    fun success(uiContent: UiContent) {
+        imageView.load(uiContent.backdropImage, R.drawable.place_holder)
+        titleTextView.text = uiContent.name
+        descriptionTextView.text = uiContent.overview
+        genresView.bindGenres(uiContent.genres)
+        ratingBar.rating = (uiContent.voteAverage / 2).toFloat()
     }
 
     companion object {

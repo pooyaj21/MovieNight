@@ -8,36 +8,36 @@ import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.core.model.Movie
+import com.example.core.model.Content
 import com.example.movienight.R
 import com.example.movienight.Screen
 import com.example.movienight.exctation.dpToPx
 import com.example.movienight.exctation.load
 
 @SuppressLint("ViewConstructor")
-class MovieCardView(
+class ContentCardView(
     context: Context,
-    movie: Movie,
-    onMovieClickListener: (Movie) -> Unit
+    content: Content,
+    onContentClickListener: (Content) -> Unit
 ) : LinearLayout(context) {
     private val image = ImageView(context).apply {
         scaleType = ImageView.ScaleType.CENTER
-        load(movie.posterImage, R.drawable.place_holder)
+        load(content.posterImage, R.drawable.place_holder)
         gravity = Gravity.CENTER
     }
     private val name = TextView(context).apply {
-        text = movie.title
+        text = content.name
         textSize = 6.dpToPx.toFloat()
         setTextColor(Color.WHITE)
         setPadding(5.dpToPx, 0, 0, 0)
     }
     private val description = TextView(context).apply {
-        text = movie.overview
+        text = content.overview
         textSize = 4.dpToPx.toFloat()
         setTextColor(Color.WHITE)
         setPadding(5.dpToPx, 0, 0, 0)
         setOnClickListener {
-            onMovieClickListener(movie)
+            onContentClickListener(content)
         }
     }
 

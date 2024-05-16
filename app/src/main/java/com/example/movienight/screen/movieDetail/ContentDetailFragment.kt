@@ -11,28 +11,28 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieDetailFragment : DialogFragment() {
+class ContentDetailFragment : DialogFragment() {
 
-    private val args: MovieDetailFragmentArgs by navArgs()
+    private val args: ContentDetailFragmentArgs by navArgs()
 
-    private val viewModel: MovieDetailViewModel by viewModel()
+    private val viewModel: ContentDetailViewViewModel by viewModel()
 
-    private var movieDetailView: MovieDetailView? = null
+    private var contentDetailView: ContentDetailView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        viewModel.getGenres(args.movie.genreIds)
-        movieDetailView = MovieDetailView(requireContext())
-        return movieDetailView
+        viewModel.getGenres(args.content.genreIds)
+        contentDetailView = ContentDetailView(requireContext())
+        return contentDetailView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.taskFlow.onEach { task ->
             when (task) {
-                is MovieDetailTask.GenresFound -> movieDetailView?.success(args.movie.toUiMovie(task.genres))
-                null -> movieDetailView?.loading()
+                is ContentDetailTask.GenresFound -> contentDetailView?.success(args.content.toUiContent(task.genres))
+                null -> contentDetailView?.loading()
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }

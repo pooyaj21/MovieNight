@@ -8,13 +8,13 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.animation.doOnEnd
-import com.example.core.model.Movie
+import com.example.core.model.Content
 import com.example.movienight.R
 import com.example.movienight.Screen
 
 @SuppressLint("ViewConstructor")
-class WheelView(context: Context, list: List<Movie>) : ConstraintLayout(context) {
-    private val circleView = CircleView(context, list ?: listOf()).apply {
+class WheelView(context: Context, list: List<Content>) : ConstraintLayout(context) {
+    private val circleView = CircleView(context, list).apply {
         id = generateViewId()
     }
     private val arrowView = ImageView(context).apply {

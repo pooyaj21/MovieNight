@@ -1,9 +1,9 @@
 package com.example.movienight
 
 import com.example.core.di.coreDiModule
-import com.example.movienight.screen.movieDetail.MovieDetailViewModel
+import com.example.movienight.screen.movieDetail.ContentDetailViewViewModel
 import com.example.movienight.screen.rollForKnowledge.RollViewModel
-import com.example.movienight.screen.selectMovie.SelectMovieViewModel
+import com.example.movienight.screen.selectMovie.SelectContentViewModel
 import com.example.movienight.screen.splash.SplashViewModel
 import com.example.movienight.screen.start.StartViewModel
 import com.example.movienight.screen.startConfirmation.NameViewModel
@@ -17,14 +17,14 @@ val appKoinModule = module {
     viewModel { SplashViewModel() }
 
     viewModel {
-        SelectMovieViewModel(
+        SelectContentViewModel(
             getListPopularMoviesUseCase = get(),
             getFirstNameUseCase=get(),
-            getFoundedMoviesUseCase = get(),
-            insertFoundedMoviesListUseCase = get(),
+            getFoundedContentsUseCase = get(),
+            insertFoundedContentsListUseCase = get(),
             getCountOfListCompletedUseCase = get(),
-            insertFirstMoviesListUseCase = get(),
-            insertSecondMoviesListUseCase = get()
+            insertFirstContentsListUseCase = get(),
+            insertSecondContentsListUseCase = get()
         )
     }
 
@@ -43,12 +43,12 @@ val appKoinModule = module {
         RollViewModel(
             getFirstNameUseCase = get(),
             getSecondNameUseCase = get(),
-            getMatchingMoviesUseCase = get()
+            getMatchingContentContentsUseCase = get()
         )
     }
 
     viewModel {
-        MovieDetailViewModel(
+        ContentDetailViewViewModel(
             getGenresNameUseCase = get()
         )
     }

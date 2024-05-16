@@ -5,10 +5,10 @@ import com.example.core.data.remote.extension.toUtcDate
 import com.example.core.model.Content
 import com.example.core.service.response.ContentResponse
 
-fun ContentResponse.MovieResponse.map(): Content.Movie {
-    return Content.Movie(
+fun ContentResponse.TvSeriesResponse.map(): Content.TvSeries {
+    return Content.TvSeries(
         id = id,
-        name = title,
+        name = name,
         genreIds = genreIds,
         overview = overview,
         backdropImage = backdropImage?.map(),

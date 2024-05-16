@@ -8,15 +8,15 @@ import androidx.core.view.isVisible
 import com.example.movienight.components.AppLoadingView
 import com.example.movienight.exctation.dpToPx
 
-class MovieDetailView(context: Context) : FrameLayout(context) {
+class ContentDetailView(context: Context) : FrameLayout(context) {
 
     private val loadingView = AppLoadingView(context)
-    private val movieDetailCellView = MovieDetailCellView(context)
+    private val contentDetailCellView = ContentDetailCellView(context)
 
     init {
         setBackgroundColor(Color.TRANSPARENT)
         addView(
-            movieDetailCellView,
+            contentDetailCellView,
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
                 gravity = Gravity.CENTER
                 setMargins(5.dpToPx, 0, 5.dpToPx, 0)
@@ -30,15 +30,15 @@ class MovieDetailView(context: Context) : FrameLayout(context) {
     }
 
     fun loading() {
-        movieDetailCellView.isVisible = false
+        contentDetailCellView.isVisible = false
         loadingView.isVisible = true
         loadingView.bringToFront()
     }
 
-    fun success(uiMovie: UiMovie) {
-        movieDetailCellView.success(uiMovie)
+    fun success(uiContent: UiContent) {
+        contentDetailCellView.success(uiContent)
         loadingView.isVisible = false
-        movieDetailCellView.isVisible = true
-        movieDetailCellView.bringToFront()
+        contentDetailCellView.isVisible = true
+        contentDetailCellView.bringToFront()
     }
 }

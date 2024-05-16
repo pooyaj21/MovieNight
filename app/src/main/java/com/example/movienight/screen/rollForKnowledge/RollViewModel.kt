@@ -1,16 +1,14 @@
 package com.example.movienight.screen.rollForKnowledge
 
 import androidx.lifecycle.viewModelScope
-import com.example.core.domain.usecase.GetFirstNameUseCase
-import com.example.core.domain.usecase.GetMatchingMoviesUseCase
-import com.example.core.domain.usecase.GetSecondNameUseCase
+import com.example.core.domain.usecase.*
 import com.example.movienight.architect.BaseViewModel
 import kotlinx.coroutines.launch
 
 class RollViewModel(
     private val getFirstNameUseCase: GetFirstNameUseCase,
     private val getSecondNameUseCase: GetSecondNameUseCase,
-    private val getMatchingMoviesUseCase: GetMatchingMoviesUseCase
+    private val getMatchingContentContentsUseCase: GetMatchingContentContentsUseCase
 ) : BaseViewModel<RollTask>() {
 
     init {
@@ -19,7 +17,7 @@ class RollViewModel(
                 RollTask.DataCompleted(
                     getFirstNameUseCase(),
                     getSecondNameUseCase(),
-                    getMatchingMoviesUseCase()
+                    getMatchingContentContentsUseCase()
                 )
             )
         }

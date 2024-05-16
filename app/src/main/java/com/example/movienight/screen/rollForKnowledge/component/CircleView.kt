@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.view.View
-import com.example.core.model.Movie
+import com.example.core.model.Content
 import com.example.movienight.R
 import kotlin.math.cos
 import kotlin.math.sin
 
 @SuppressLint("ViewConstructor")
-class CircleView(context: Context, private val items: List<Movie>) : View(context) {
+class CircleView(context: Context, private val items: List<Content>) : View(context) {
 
     private val slicePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val linePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -30,7 +30,7 @@ class CircleView(context: Context, private val items: List<Movie>) : View(contex
 
         var startAngle = -90f // Start from the top
 
-        items.forEachIndexed { index, movie ->
+        items.forEachIndexed { index, content ->
             val sweepAngle = 360f / items.size
 
             // Draw the slice
@@ -46,7 +46,7 @@ class CircleView(context: Context, private val items: List<Movie>) : View(contex
             canvas.drawLine(centerX, centerY, lineEndX, lineEndY, linePaint)
 
             // Draw the text
-            val name = movie.title
+            val name = content.name
             textPaint.textSize = 30f // Adjust text size as needed
             textPaint.color = Color.WHITE
             val textWidth = textPaint.measureText(name)

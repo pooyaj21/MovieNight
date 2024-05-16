@@ -7,7 +7,7 @@ import android.graphics.Color
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.core.model.Movie
+import com.example.core.model.Content
 import com.example.movienight.exctation.dpToPx
 import com.example.movienight.screen.rollForKnowledge.component.WheelView
 import kotlin.random.Random
@@ -15,7 +15,7 @@ import kotlin.random.Random
 @SuppressLint("ViewConstructor")
 class RollView(
     context: Context,
-    private val onMovieSelect: (Movie) -> Unit
+    private val onContentSelect: (Content) -> Unit
 ) : LinearLayout(context) {
     private val titleTextView = TextView(context).apply {
         text = "Your fate will be chosen now!!"
@@ -37,7 +37,7 @@ class RollView(
         addView(nameTextView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
     }
 
-    fun success(firstName: String?, secondName: String?, list: List<Movie>?) {
+    fun success(firstName: String?, secondName: String?, list: List<Content>?) {
         if (firstName!=null && secondName!=null) {
             nameTextView.text = "${firstName}\n&\n${secondName}"
         }else nameTextView.text = "Your"
@@ -45,13 +45,13 @@ class RollView(
         list?.let {
             val size = list.size
             val theChosenOneNumber = Random.nextInt(size)
-            val theChosenOneMovie = list[theChosenOneNumber]
-            Log.d(TAG, "The chosen one is:${theChosenOneMovie}")
+            val theChosenOneContent = list[theChosenOneNumber]
+            Log.d(TAG, "The chosen one is:${theChosenOneContent}")
             val sliceDegree = 360 / size
             val theChosenOneMidDegree = (sliceDegree * (theChosenOneNumber)) + (sliceDegree / 2)
             val wheelView = WheelView(context, list)
             wheelView.spinArrow(theChosenOneMidDegree.toFloat()) {
-                onMovieSelect(theChosenOneMovie)
+                onContentSelect(theChosenOneContent)
             }
             addView(wheelView)
         }

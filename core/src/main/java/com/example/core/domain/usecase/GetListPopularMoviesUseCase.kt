@@ -3,7 +3,7 @@ package com.example.core.domain.usecase
 import com.example.core.data.remote.repository.MovieRepository
 import com.example.core.domain.UseCase
 import com.example.core.model.BaseListModel
-import com.example.core.model.Movie
+import com.example.core.model.Content
 import com.example.core.shared.DispatcherProvider
 import com.example.core.shared.NightResult
 import com.example.core.shared.kotlin.suspendSafeDataResult
@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 
 interface GetListPopularMoviesUseCase : UseCase {
 
-    suspend operator fun invoke(page: Int?): NightResult<BaseListModel<Movie>>
+    suspend operator fun invoke(page: Int?): NightResult<BaseListModel<Content.Movie>>
 
 }
 
@@ -20,7 +20,7 @@ internal class GetListPopularMoviesUseCaseImpl(
     private val dispatcherProvider: DispatcherProvider
 ) : GetListPopularMoviesUseCase {
 
-    override suspend fun invoke(page: Int?): NightResult<BaseListModel<Movie>> {
+    override suspend fun invoke(page: Int?): NightResult<BaseListModel<Content.Movie>> {
         return withContext(dispatcherProvider.io) {
             suspendSafeDataResult {
                 movieRepository.populars(page)

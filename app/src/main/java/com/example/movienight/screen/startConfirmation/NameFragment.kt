@@ -27,7 +27,7 @@ class NameFragment : Fragment() {
         nameView = NameView(
             requireContext(),
             goNext = {
-                findNavController().navigate(R.id.selectMovieFragment)
+                findNavController().navigate(R.id.selectContentFragment)
             }
         )
         return nameView

@@ -14,7 +14,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.asynctaskcoffee.cardstack.CardContainer
 import com.asynctaskcoffee.cardstack.CardListener
-import com.example.core.model.Movie
+import com.example.core.model.Content
 import com.example.movienight.Screen
 import com.example.movienight.components.AppLoadingView
 import com.example.movienight.exctation.dpToPx
@@ -22,14 +22,14 @@ import com.example.movienight.screen.selectMovie.cardContaioner.CardContainerAda
 
 
 @SuppressLint("ViewConstructor")
-class SelectMovieView(
+class SelectContentView(
     context: Context,
-    onSwipeCompleted: (List<Movie>) -> Unit,
-    onMovieClickListener: (Movie) -> Unit
+    onSwipeCompleted: (List<Content>) -> Unit,
+    onContentClickListener: (Content) -> Unit
 ) : FrameLayout(context) {
 
-    private var theList = listOf<Movie>()
-    private val favoriteList = mutableListOf<Movie>()
+    private var theList = listOf<Content>()
+    private val favoriteList = mutableListOf<Content>()
 
     private val cardContainer = CardContainer(context, null).apply {
         isVisible = false
@@ -82,7 +82,7 @@ class SelectMovieView(
     }
     private val loadingView = AppLoadingView(context)
 
-    private val adapter = CardContainerAdapter(context, onMovieClickListener)
+    private val adapter = CardContainerAdapter(context, onContentClickListener)
 
     init {
         contentView.apply {
@@ -104,7 +104,7 @@ class SelectMovieView(
         addView(loadingView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
     }
 
-    fun submitList(list: List<Movie>) {
+    fun submitList(list: List<Content>) {
         theList = list
         adapter.submitList(list)
         cardContainer.notifyAppendData()

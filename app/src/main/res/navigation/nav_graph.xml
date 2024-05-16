@@ -23,15 +23,15 @@
     </fragment>
 
     <fragment
-        android:id="@+id/selectMovieFragment"
-        android:name="com.example.movienight.screen.selectMovie.SelectMovieFragment"
-        android:label="SelectMovieFragment">
+        android:id="@+id/selectContentFragment"
+        android:name="com.example.movienight.screen.selectMovie.SelectContentFragment"
+        android:label="SelectContentFragment">
         <action
-            android:id="@+id/action_movie_detail_selectMovieFragment"
-            app:destination="@id/movieDetailFragment">
+            android:id="@+id/action_content_detail_select_content_fragment"
+            app:destination="@id/contentDetailFragment">
             <argument
-                android:name="movie"
-                app:argType="com.example.core.model.Movie" />
+                android:name="content"
+                app:argType="com.example.core.model.Content" />
         </action>
     </fragment>
 
@@ -40,21 +40,21 @@
         android:name="com.example.movienight.screen.rollForKnowledge.RollFragment"
         android:label="RollFragment">
         <action
-            android:id="@+id/action_movie_detail_selectMovieFragment"
-            app:destination="@id/movieDetailFragment">
+            android:id="@+id/action_content_detail_select_content_fragment"
+            app:destination="@id/contentDetailFragment">
             <argument
-                android:name="movie"
-                app:argType="com.example.core.model.Movie" />
+                android:name="content"
+                app:argType="com.example.core.model.Content" />
         </action>
     </fragment>
 
     <fragment
-        android:id="@+id/movieDetailFragment"
-        android:name="com.example.movienight.screen.movieDetail.MovieDetailFragment"
-        android:label="MovieDetailFragment">
+        android:id="@+id/contentDetailFragment"
+        android:name="com.example.movienight.screen.movieDetail.ContentDetailFragment"
+        android:label="contentDetailFragment">
         <argument
-            android:name="movie"
-            app:argType="com.example.core.model.Movie" />
+            android:name="content"
+            app:argType="com.example.core.model.Content" />
     </fragment>
 
 

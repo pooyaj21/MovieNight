@@ -6,9 +6,9 @@ import com.example.core.shared.NightResult
 import com.example.movienight.architect.BaseViewModel
 import kotlinx.coroutines.launch
 
-class MovieDetailViewModel(
+class ContentDetailViewViewModel(
     private val getGenresNameUseCase: GetGenresNameUseCase
-) : BaseViewModel<MovieDetailTask>() {
+) : BaseViewModel<ContentDetailTask>() {
 
     fun getGenres(genreIds: List<Int>) {
         viewModelScope.launch {
@@ -16,7 +16,7 @@ class MovieDetailViewModel(
                 is NightResult.Error.Local -> {}
                 is NightResult.Error.Remote -> {}
                 is NightResult.Success -> {
-                    setTask(MovieDetailTask.GenresFound(result.value.list))
+                    setTask(ContentDetailTask.GenresFound(result.value.list))
                 }
             }
         }

@@ -6,11 +6,11 @@ import com.example.core.service.response.GenresListResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MovieService {
+interface TvSeriesService {
 
-    @GET("movie/popular?language=en-US")
-    suspend fun populars(@Query("page") page: Int): BaseListResponse<ContentResponse.MovieResponse>
+    @GET("tv/popular?language=en-US")
+    suspend fun populars(@Query("page") page: Int): BaseListResponse<ContentResponse.TvSeriesResponse>
 
-    @GET("genre/movie/list?language=en")
+    @GET("genre/tv/list?language=en")
     suspend fun genres(): GenresListResponse
 }

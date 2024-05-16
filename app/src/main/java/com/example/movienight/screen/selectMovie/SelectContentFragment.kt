@@ -12,46 +12,46 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SelectMovieFragment : Fragment() {
+class SelectContentFragment : Fragment() {
 
-    private val viewModel: SelectMovieViewModel by viewModel()
+    private val viewModel: SelectContentViewModel by viewModel()
 
-    private var selectMovieView: SelectMovieView? = null
+    private var selectContentView: SelectContentView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (selectMovieView == null) {
-            selectMovieView = SelectMovieView(
+        if (selectContentView == null) {
+            selectContentView = SelectContentView(
                 requireContext(),
                 onSwipeCompleted = { favorite ->
                     viewModel.listEnded(favorite)
                 },
-                onMovieClickListener = { movie ->
+                onContentClickListener = { content ->
                     findNavController().navigate(
-                        SelectMovieFragmentDirections.actionMovieDetailSelectMovieFragment(movie)
+                        SelectContentFragmentDirections.actionContentDetailSelectContentFragment(content)
                     )
                 }
             )
         }
-        return selectMovieView
+        return selectContentView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.taskFlow.onEach { task ->
             when (task) {
-                is SelectMovieTask.ListFound -> selectMovieView?.submitList(task.movies)
-                SelectMovieTask.NextList -> {
+                is SelectContentTask.ListFound -> selectContentView?.submitList(task.contents)
+                SelectContentTask.NextList -> {
                     findNavController().navigate(R.id.nameFragment)
                 }
-                SelectMovieTask.GoNext -> {
+                SelectContentTask.GoNext -> {
                     findNavController().navigate(R.id.rollFragment)
                 }
                 null -> {
-                    selectMovieView?.loading()
+                    selectContentView?.loading()
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -59,6 +59,6 @@ class SelectMovieFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        selectMovieView = null
+        selectContentView = null
     }
 }
