@@ -6,11 +6,15 @@ import com.example.core.model.Content
 
 interface ContentListRepository {
 
+    fun insertType(type: Content.Type): Content.Type
+
     fun insertFoundedList(list: List<Content>): List<Content>
 
     fun insertFirstList(list: List<Content>): List<Content>
 
     fun insertSecondList(list: List<Content>): List<Content>
+
+    fun getType(): Content.Type
 
     fun getFoundedList(): List<Content>?
 
@@ -22,6 +26,11 @@ interface ContentListRepository {
 internal class ContentListRepositoryImpl(
     private val contentLists: ContentLists
 ) : ContentListRepository {
+
+    override fun insertType(type: Content.Type): Content.Type {
+        contentLists.type = type
+        return contentLists.type
+    }
 
     override fun insertFoundedList(list: List<Content>): List<Content> {
         contentLists.foundedList = list
@@ -36,6 +45,10 @@ internal class ContentListRepositoryImpl(
     override fun insertSecondList(list: List<Content>): List<Content> {
         contentLists.secondList = list
         return list
+    }
+
+    override fun getType(): Content.Type {
+        return contentLists.type
     }
 
     override fun getFoundedList(): List<Content>? {

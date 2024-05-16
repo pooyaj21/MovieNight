@@ -95,6 +95,18 @@ val coreDiModule = module {
         )
     }
 
+    factory<InsertContentTypeUseCase> {
+        InsertContentTypeUseCaseImpl(
+            contentListRepository = get()
+        )
+    }
+
+    factory<GetContentTypeUseCase> {
+        GetContentTypeUseCaseImpl(
+            contentListRepository = get()
+        )
+    }
+
     factory<InsertNamesUseCase> {
         InsertNamesUseCaseImpl(
             namesRepository = get()

@@ -98,4 +98,8 @@ open class Content(
         originalLanguage = originalLanguage,
         voteAverage = voteAverage
     )
+
+    enum class Type {
+        MOVIE, TV_SERIES
+    }
 }
