@@ -3,12 +3,18 @@ package com.example.movienight.screen.start
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
+import android.view.Gravity
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.*
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat.getColor
+import com.example.core.model.Content
 import com.example.movienight.R
 import com.example.movienight.Screen
 import com.example.movienight.components.AppEditTextView
@@ -17,8 +23,8 @@ import com.example.movienight.exctation.dpToPx
 @SuppressLint("ViewConstructor")
 class StartView(
     context: Context,
-    private val onNextClick: (firstName: String, secondName: String) -> Unit,
-    private val onSoloClick: () -> Unit
+    private val onNextClick: (firstName: String, secondName: String, type: Content.Type) -> Unit,
+    private val onSoloClick: (type: Content.Type) -> Unit
 ) : ConstraintLayout(context) {
 
     private val editTextSize = Screen.size.width * 0.8
@@ -41,6 +47,63 @@ class StartView(
         setTextColor(Color.WHITE)
         text = "&"
         textSize = 25F
+    }
+    private val switch = SwitchCompat(context).apply {
+        if (isChecked) {
+            thumbDrawable.setColorFilter(
+                getColor(context, R.color.mahogany),
+                PorterDuff.Mode.SRC_IN
+            )
+            trackDrawable.setColorFilter(getColor(context, R.color.blue), PorterDuff.Mode.SRC_IN)
+        } else {
+            thumbDrawable.setColorFilter(getColor(context, R.color.blue), PorterDuff.Mode.SRC_IN)
+            trackDrawable.setColorFilter(
+                getColor(context, R.color.mahogany),
+                PorterDuff.Mode.SRC_IN
+            )
+        }
+        setOnClickListener {
+            if (isChecked) {
+                thumbDrawable.setColorFilter(
+                    getColor(context, R.color.mahogany),
+                    PorterDuff.Mode.SRC_IN
+                )
+                trackDrawable.setColorFilter(
+                    getColor(context, R.color.blue),
+                    PorterDuff.Mode.SRC_IN
+                )
+            } else {
+                thumbDrawable.setColorFilter(
+                    getColor(context, R.color.blue),
+                    PorterDuff.Mode.SRC_IN
+                )
+                trackDrawable.setColorFilter(
+                    getColor(context, R.color.mahogany),
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
+        }
+    }
+    private val switchLayout = LinearLayout(context).apply {
+        id = generateViewId()
+        orientation = LinearLayout.HORIZONTAL
+        gravity = Gravity.CENTER
+
+        val movieTextView = TextView(context).apply {
+            setTextColor(Color.WHITE)
+            text = "Movie"
+            textSize = 15F
+            setPadding(0,0,5.dpToPx,0)
+        }
+        val tvSeriesTextView = TextView(context).apply {
+            setTextColor(Color.WHITE)
+            text = "TV Series"
+            textSize = 15F
+            setPadding(5.dpToPx,0,0,0)
+        }
+        addView(movieTextView)
+        addView(switch, LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
+        addView(tvSeriesTextView)
     }
     private val letsGoButton = Button(context).apply {
         id = generateViewId()
@@ -65,7 +128,8 @@ class StartView(
         }
         text = "Solo Queue"
         setOnClickListener {
-            onSoloClick()
+            val type = if (switch.isChecked) Content.Type.TV_SERIES else Content.Type.MOVIE
+            onSoloClick(type)
         }
     }
 
@@ -75,6 +139,7 @@ class StartView(
         addView(firstNameEditText, LayoutParams(editTextSize.toInt(), WRAP_CONTENT))
         addView(andTextView, LayoutParams(WRAP_CONTENT, WRAP_CONTENT))
         addView(secondNameEditText, LayoutParams(editTextSize.toInt(), WRAP_CONTENT))
+        addView(switchLayout, LayoutParams(MATCH_PARENT, WRAP_CONTENT))
         addView(letsGoButton, LayoutParams((editTextSize.toInt()) / 2, WRAP_CONTENT))
         addView(soloButton, LayoutParams(((editTextSize.toInt()) / 1.5).toInt(), WRAP_CONTENT))
 
@@ -93,11 +158,15 @@ class StartView(
         // second name EditText
         constraintSet.connect(secondNameEditText.id, START, PARENT_ID, START, 0)
         constraintSet.connect(secondNameEditText.id, END, PARENT_ID, END, 0)
-        constraintSet.connect(secondNameEditText.id, BOTTOM, letsGoButton.id, TOP, 10.dpToPx)
+        constraintSet.connect(secondNameEditText.id, BOTTOM, switchLayout.id, TOP, 10.dpToPx)
+        // switch
+        constraintSet.connect(switchLayout.id, START, PARENT_ID, START, 0)
+        constraintSet.connect(switchLayout.id, END, PARENT_ID, END, 0)
+        constraintSet.connect(switchLayout.id, TOP, secondNameEditText.id, BOTTOM, 55.dpToPx)
         // Let's Go Button
         constraintSet.connect(letsGoButton.id, START, PARENT_ID, START, 0)
         constraintSet.connect(letsGoButton.id, END, PARENT_ID, END, 0)
-        constraintSet.connect(letsGoButton.id, TOP, secondNameEditText.id, BOTTOM, 130.dpToPx)
+        constraintSet.connect(letsGoButton.id, TOP, switchLayout.id, BOTTOM, 55.dpToPx)
         // Solo Button
         constraintSet.connect(soloButton.id, START, PARENT_ID, START, 0)
         constraintSet.connect(soloButton.id, END, PARENT_ID, END, 0)
@@ -112,8 +181,9 @@ class StartView(
         secondNameEditText.error = null
         val firstName = firstNameEditText.text
         val secondName = secondNameEditText.text
+        val type = if (switch.isChecked) Content.Type.TV_SERIES else Content.Type.MOVIE
         if (firstName.isBlank().not() && secondName.isBlank().not()) {
-            onNextClick(firstName, secondName)
+            onNextClick(firstName, secondName, type)
         } else {
             if (firstName.isBlank())
                 firstNameEditText.error = "You must fill this"

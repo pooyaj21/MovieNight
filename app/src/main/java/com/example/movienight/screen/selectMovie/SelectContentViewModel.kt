@@ -10,6 +10,8 @@ import java.util.*
 
 class SelectContentViewModel(
     private val getListPopularMoviesUseCase: GetListPopularMoviesUseCase,
+    private val getListPopularTvSeriesUseCase: GetListPopularTvSeriesUseCase,
+    private val getContentTypeUseCase: GetContentTypeUseCase,
     private val getFirstNameUseCase: GetFirstNameUseCase,
     private val getFoundedContentsUseCase: GetFoundedContentsUseCase,
     private val insertFoundedContentsListUseCase: InsertFoundedContentsListUseCase,
@@ -24,7 +26,11 @@ class SelectContentViewModel(
             val founded = getFoundedContentsUseCase()
             if (founded == null) {
                 val page = Random().nextInt(10) + 1
-                when (val result = getListPopularMoviesUseCase(page)) {
+                when (
+                    val result =
+                        if (getContentTypeUseCase() == Content.Type.MOVIE) getListPopularMoviesUseCase(page)
+                        else getListPopularTvSeriesUseCase(page)
+                ) {
                     is NightResult.Error.Local -> {}
                     is NightResult.Error.Remote -> {}
                     is NightResult.Success -> {
@@ -40,8 +46,7 @@ class SelectContentViewModel(
             if (getFirstNameUseCase() == null) {
                 insertFirstContentsListUseCase(favorites)
                 setTask(SelectContentTask.GoNext)
-            }
-            else {
+            } else {
                 when (getCountOfListCompletedUseCase()) {
                     0 -> {
                         insertFirstContentsListUseCase(favorites)

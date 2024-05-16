@@ -19,7 +19,9 @@ val appKoinModule = module {
     viewModel {
         SelectContentViewModel(
             getListPopularMoviesUseCase = get(),
-            getFirstNameUseCase=get(),
+            getListPopularTvSeriesUseCase = get(),
+            getContentTypeUseCase = get(),
+            getFirstNameUseCase = get(),
             getFoundedContentsUseCase = get(),
             insertFoundedContentsListUseCase = get(),
             getCountOfListCompletedUseCase = get(),
@@ -28,7 +30,12 @@ val appKoinModule = module {
         )
     }
 
-    viewModel { StartViewModel(insertNamesUseCase = get()) }
+    viewModel {
+        StartViewModel(
+            insertNamesUseCase = get(),
+            insertContentTypeUseCase = get()
+        )
+    }
 
 
     viewModel {

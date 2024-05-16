@@ -20,11 +20,13 @@ class StartFragment : Fragment() {
     ): View {
         return StartView(
             requireContext(),
-            onNextClick = { firstName, secondName ->
+            onNextClick = { firstName, secondName, type ->
                 viewModel.saveNames(firstName, secondName)
+                viewModel.saveType(type)
                 findNavController().navigate(R.id.nameFragment)
             },
-            onSoloClick = {
+            onSoloClick = { type ->
+                viewModel.saveType(type)
                 findNavController().navigate(R.id.nameFragment)
             }
         )
