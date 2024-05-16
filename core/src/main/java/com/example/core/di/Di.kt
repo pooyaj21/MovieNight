@@ -46,6 +46,13 @@ val coreDiModule = module {
         )
     }
 
+    factory<GetListPopularTvSeriesUseCase> {
+        GetListPopularTvSeriesUseCaseImpl(
+            tvSeriesRepository = get(),
+            dispatcherProvider = get()
+        )
+    }
+
     factory<GetMatchingContentContentsUseCase> {
         GetMatchingContentContentsUseCaseImpl(
             contentListRepository = get()
